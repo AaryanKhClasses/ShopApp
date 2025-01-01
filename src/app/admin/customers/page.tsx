@@ -20,7 +20,6 @@ async function CustomersTable() {
                 <TableRow>
                     <TableHead>Customer Email</TableHead>
                     <TableHead>Purchased Amount</TableHead>
-                    <TableHead className="w-0"><span className="sr-only">Actions</span></TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>

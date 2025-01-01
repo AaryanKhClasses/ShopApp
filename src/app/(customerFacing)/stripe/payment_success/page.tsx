@@ -22,7 +22,7 @@ export default async function SuccessPage({ searchParams }: { searchParams: { pa
     if(isSuccess) {
         await db.user.update({
             where: { id: user.id },
-            data: { id: user.id, orders: { create: { price: product.price, productID: product.id } } }
+            data: { id: user.id, orders: { create: { price: product.price, productID: product.id, quantity: 1, fullfilled: false } } }
         })
     }
 

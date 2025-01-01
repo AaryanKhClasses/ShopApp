@@ -37,6 +37,7 @@ model Order {
 	price		Int
 	userID 		String
 	productID 	String
+	fullfilled	Boolean		@default(false)
 	createdAt 	DateTime 	@default(now())
 	updatedAt 	DateTime 	@updatedAt
 

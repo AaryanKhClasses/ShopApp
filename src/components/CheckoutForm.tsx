@@ -2,7 +2,7 @@
 
 import { Product } from "@prisma/client"
 import { loadStripe } from "@stripe/stripe-js"
-import { Elements, LinkAuthenticationElement, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
+import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import Image from "next/image"
 import { formatCurrency } from "@/lib/formatter"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"

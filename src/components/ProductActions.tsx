@@ -1,9 +1,9 @@
 "use client"
 
-import { useTransition } from "react";
-import { DropdownMenuItem } from "./ui/dropdown-menu";
-import { deleteProduct, toggleProductAvailability } from "@/app/admin/_actions/products";
-import { useRouter } from "next/navigation";
+import { useTransition } from "react"
+import { DropdownMenuItem } from "./ui/dropdown-menu"
+import { deleteProduct, toggleProductAvailability } from "@/app/admin/_actions/products"
+import { useRouter } from "next/navigation"
 
 export function ActiveToggleItem({ id, isAvailable }: { id: string, isAvailable: boolean }) {
     const [isPending, startTransition] = useTransition()
