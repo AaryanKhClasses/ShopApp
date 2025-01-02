@@ -20,6 +20,16 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
+CREATE TABLE "cartItem" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "userID" TEXT NOT NULL,
+    "productID" TEXT NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "cartItem_userID_fkey" FOREIGN KEY ("userID") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- CreateTable
 CREATE TABLE "Order" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "quantity" INTEGER NOT NULL,

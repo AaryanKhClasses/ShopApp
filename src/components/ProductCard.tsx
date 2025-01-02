@@ -4,7 +4,6 @@ import { Button } from "./ui/button"
 import Image from "next/image"
 import { LoginModal } from "./LoginModal"
 import { getUserSession } from "@/lib/session"
-import Link from "next/link"
 
 type ProductCardProps = {
     id: string
@@ -26,7 +25,7 @@ export async function ProductCard({ id, name, price, description, imagePath }: P
                 <CardDescription>{formatCurrency(price)}</CardDescription>
             </CardHeader>
             <CardContent className="flex-grow"><p className="line-clamp-4">{description}</p></CardContent>
-            <CardFooter><LoginModal id={id} isUser={isUser} /></CardFooter>
+            <CardFooter><LoginModal userID={isUser ? userSession.id : ""} productID={id} isUser={isUser} /></CardFooter>
         </Card>
     )
 }
