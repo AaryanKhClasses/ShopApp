@@ -1,6 +1,6 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import db from "@/db/db"
 import { formatCurrency, formatNumber } from "@/lib/formatter"
+import { Card, CardBody, CardHeader } from "@nextui-org/card"
 
 export default async function AdminDashboard() {
     const [salesData, customerData, productData] = await Promise.all([getSalesData(), getCustomerData(), getProductData()])
@@ -57,11 +57,11 @@ type DashboardCardProps = {
 function DashboardCard({ title, subtitle, body }: DashboardCardProps) {
     return (
         <Card>
-            <CardHeader>
-                <CardTitle>{title}</CardTitle>
-                <CardDescription>{subtitle}</CardDescription>
+            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                <h4 className="font-bold text-xl">{title}</h4>
+                <small className="text-default-500 mx-1 line-clamp-3">{subtitle}</small>
             </CardHeader>
-            <CardContent><p>{body}</p></CardContent>
+            <CardBody><p>{body}</p></CardBody>
         </Card>
     )
 }

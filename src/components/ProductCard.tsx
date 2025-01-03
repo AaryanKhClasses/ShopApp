@@ -1,9 +1,10 @@
+"use client"
+
 import { formatCurrency } from "@/lib/formatter"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
-import { Button } from "./ui/button"
-import Image from "next/image"
 import { LoginModal } from "./LoginModal"
-import { getUserSession } from "@/lib/session"
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card"
+import { Image } from "@nextui-org/image"
+import { Skeleton } from "@nextui-org/skeleton"
 
 type ProductCardProps = {
     id: string
@@ -11,39 +12,35 @@ type ProductCardProps = {
     price: number
     description: string
     imagePath: string
+    isUser: boolean
+    userID: string
 }
 
-export async function ProductCard({ id, name, price, description, imagePath }: ProductCardProps) {
-    const userSession = await getUserSession()
-    let isUser = false
-    if(userSession) isUser = true
+export function ProductCard({ id, name, price, description, imagePath, isUser, userID }: ProductCardProps) {
     return (
-        <Card className="flex overflow-hidden flex-col">
-            <div className="relative w-full h-auto aspect-video"><Image src={imagePath} fill alt={name}></Image></div>
-            <CardHeader>
-                <CardTitle>{name}</CardTitle>
-                <CardDescription>{formatCurrency(price)}</CardDescription>
+        <Card className="py-4" radius="lg">
+            <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                <h4 className="font-bold text-l">{name}</h4>
+                <p className="text-tiny font-bold">{formatCurrency(price)}</p>
+                <small className="text-default-500 line-clamp-3">{description}</small>
             </CardHeader>
-            <CardContent className="flex-grow"><p className="line-clamp-4">{description}</p></CardContent>
-            <CardFooter><LoginModal userID={isUser ? userSession.id : ""} productID={id} isUser={isUser} /></CardFooter>
+            <CardBody className="overflow-visible py-2">
+                <Image src={imagePath} alt={name} className="w-full h-auto aspect-video" />
+            </CardBody>
+            <CardFooter><LoginModal userID={isUser ? userID : ""} productID={id} isUser={isUser} /></CardFooter>
         </Card>
     )
 }
 
 export function ProductCardSkeleton() {
     return (
-        <Card className="overflow-hidden flex flex-col animate-pulse">
-            <div className="w-full aspect-video bg-gray-300" />
-            <CardHeader>
-                <CardTitle><div className="w-3/4 h-6 rounded-full bg-gray-300" /></CardTitle>
-                <CardDescription><div className="w-1/2 h-4 rounded-full bg-gray-300" /></CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-2">
-                <div className="w-full h-4 rounded-full bg-gray-300" />
-                <div className="w-full h-4 rounded-full bg-gray-300" />
-                <div className="w-3/4 h-4 rounded-full bg-gray-300" />
-            </CardContent>
-            <CardFooter><Button className="w-full" disabled size="lg"></Button></CardFooter>
+        <Card className="space-y-5 p-4" radius="lg">
+            <div className="space-y-3">
+                <Skeleton className="w-3/5 rounded-lg"><div className="h-3 w-3/5 rounded-lg bg-default-200" /></Skeleton>
+                <Skeleton className="w-4/5 rounded-lg"><div className="h-3 w-4/5 rounded-lg bg-default-200" /></Skeleton>
+                <Skeleton className="w-2/5 rounded-lg"><div className="h-3 w-2/5 rounded-lg bg-default-300" /></Skeleton>
+                <Skeleton className="rounded-lg"><div className="h-24 rounded-lg bg-default-300" /></Skeleton>
+            </div>
         </Card>
     )
-  }
+}

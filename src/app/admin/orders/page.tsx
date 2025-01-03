@@ -1,12 +1,8 @@
 import { PageHeader } from "@/components/PageHeader"
-import { Label } from "@/components/ui/label"
 import { ActiveToggleOrder } from "@/components/OrderActions"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import db from "@/db/db"
 import { formatCurrency } from "@/lib/formatter"
 import { MoreVertical } from "lucide-react"
-import { Checkbox } from "@/components/ui/checkbox"
 
 export default async function AdminOrdersPage() {
     const orders = await db.order.findMany({ select: { id: true, userID: true, productID: true, price: true, quantity: true, fullfilled: true }, orderBy: { createdAt: "desc" } })

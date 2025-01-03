@@ -1,11 +1,11 @@
 import { DeleteModal } from "@/components/DeleteModal"
 import { PageHeader } from "@/components/PageHeader"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import db from "@/db/db"
 import { getUserSession } from "@/lib/session"
-import Image from "next/image"
-import Link from "next/link"
+import { Image } from "@nextui-org/image"
+import { Input } from "@nextui-org/input"
+import { Button } from "@nextui-org/button"
+import { Link } from "@nextui-org/link"
 import { notFound } from "next/navigation"
 
 export default async function MySettingsPage() {
@@ -29,7 +29,7 @@ export default async function MySettingsPage() {
             </div>
             <hr className="my-3" />
             <h1 className="text-2xl my-5">Purchase Information:</h1>
-            <Button asChild className="w-full"><Link href="/me/orders">My Orders</Link></Button>
+            <Button as={Link} href="/me/orders" className="w-full">My Orders</Button>
             <hr className="my-3" />
             <h1 className="text-2xl my-5">Dangerous Settings:</h1>
             <DeleteModal user={user} />

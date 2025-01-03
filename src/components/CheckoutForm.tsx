@@ -3,13 +3,11 @@
 import { Product } from "@prisma/client"
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js"
-import Image from "next/image"
 import { formatCurrency } from "@/lib/formatter"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
-import { Button } from "./ui/button"
+import { Button } from "@nextui-org/button"
 import { FormEvent, useState } from "react"
-import { Input } from "./ui/input"
-import { Label } from "./ui/label"
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card"
+import { Image } from "@nextui-org/image"
 
 type CheckoutFormProps = {
     product: Product
@@ -22,7 +20,7 @@ export function CheckoutForm({ product, clientSecret }: CheckoutFormProps) {
     return (
         <div className="max-w-5xl w-full mx-auto space-y-8">
           <div className="flex gap-4 items-center">
-            <div className="aspect-video flex-shrink-0 w-1/3 relative"><Image src={product.imagePath} fill alt={product.name} /></div>
+            <div className="aspect-video flex-shrink-0 w-1/3 relative"><Image src={product.imagePath} alt={product.name} /></div>
             <div>
                 <div className="text-lg">{formatCurrency(product.price)}</div>
                 <h1 className="text-2xl font-bold">{product.name}</h1>
@@ -44,6 +42,7 @@ function Form({ price }: { price: number }) {
 
     function submit(e: FormEvent) {
         e.preventDefault()
+        console.log("es")
         if(stripe == null || elements == null) return
 
         setIsLoading(true)
@@ -59,11 +58,11 @@ function Form({ price }: { price: number }) {
     return <form onSubmit={submit}>
         <Card>
             <CardHeader>
-                <CardTitle>Checkout</CardTitle>
-                {errorMessage && <CardDescription className="text-destructive">{errorMessage}</CardDescription>}
+                <h2 className="text-xl">Checkout</h2>
+                {errorMessage && <small className="text-destructive text-bold text-large">{errorMessage}</small>}
             </CardHeader>
-            <CardContent><PaymentElement /></CardContent>
-            <CardFooter><Button size="lg" className="w-full" disabled={stripe == null || elements == null || isLoading}>{isLoading ? "Purchasing..." : `Purchase - ${formatCurrency(price)}`}</Button></CardFooter>
+            <CardBody><PaymentElement /></CardBody>
+            <CardFooter><Button type="submit" size="lg" className="w-full" disabled={stripe == null || elements == null || isLoading}>{isLoading ? "Purchasing..." : `Purchase - ${formatCurrency(price)}`}</Button></CardFooter>
         </Card>
     </form>
 }
