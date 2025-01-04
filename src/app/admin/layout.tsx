@@ -3,7 +3,7 @@ import { Link } from "@nextui-org/link"
 
 export const dynamic = "force-dynamic"
 
-export default async function CustomerLayout({
+export default async function AdminLayout({
     children,
     }: Readonly<{
     children: React.ReactNode

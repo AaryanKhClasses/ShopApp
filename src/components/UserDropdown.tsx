@@ -9,7 +9,7 @@ export function UserDropdown({ imagePath }: { imagePath: string }) {
         <Dropdown placement="bottom-end">
             <DropdownTrigger><Avatar isBordered radius="full" src={imagePath} /></DropdownTrigger>
             <DropdownMenu variant="flat">
-                {imagePath === "" ? <DropdownItem key="login"><Link href="/api/auth/login">Login</Link></DropdownItem>
+                {imagePath === "" ? <DropdownItem key="login"><Link href="/api/auth/signin">Login</Link></DropdownItem>
                 : <>
                 <DropdownSection showDivider>
                     <DropdownItem key="orders"><Link href="/me/orders">My Orders</Link></DropdownItem>

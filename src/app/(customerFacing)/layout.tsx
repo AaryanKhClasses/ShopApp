@@ -17,8 +17,8 @@ export default async function CustomerLayout({
                 <span className="text-2xl cursor-pointer">{process.env.APP_NAME}</span>
             </NavbarBrand>
             <NavbarContent className="flex gap-4 items-center" justify="end">
-                <NavbarItem><Link className="text-xl hover:text-red-500 duration-500" href="/">Home</Link></NavbarItem>
-                <NavbarItem><Link className="text-xl hover:text-red-500 duration-500" href="/products">Products</Link></NavbarItem>
+                <NavbarItem><Link className="text-xl font-bold hover:text-destructive duration-500" href="/">Home</Link></NavbarItem>
+                <NavbarItem><Link className="text-xl font-bold hover:text-destructive duration-500" href="/products">Products</Link></NavbarItem>
                 <NavbarItem><UserDropdown imagePath={user ? user.image as string : ""} /></NavbarItem>
             </NavbarContent>
         </Navbar>

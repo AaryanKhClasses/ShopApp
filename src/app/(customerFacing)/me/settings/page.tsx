@@ -30,6 +30,7 @@ export default async function MySettingsPage() {
             <hr className="my-3" />
             <h1 className="text-2xl my-5">Purchase Information:</h1>
             <Button as={Link} href="/me/orders" className="w-full">My Orders</Button>
+            <Button as={Link} href="/me/cart" className="w-full my-5">My Cart</Button>
             <hr className="my-3" />
             <h1 className="text-2xl my-5">Dangerous Settings:</h1>
             <DeleteModal user={user} />
