@@ -3,8 +3,8 @@
 import { Check, Edit, X } from "lucide-react"
 import { formatCurrency, formatNumber } from "@/lib/formatter"
 import { ActiveProductToggle, DeleteProduct } from "@/components/ProductActions"
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip, Link } from "@nextui-org/react"
-import { getOrdersFromUser } from "@/lib/getOrdersFromUser"
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip, Link, user } from "@nextui-org/react"
+import { ActiveOrderToggle } from "./OrderActions"
 
 type ProductsProps = {
     id: string
@@ -51,6 +51,7 @@ type UserProps = {
     id: string
     email: string
     createdAt: Date
+    purchasedAmount: number
 }[]
 
 export function AdminCustomersTable({ users }: { users: UserProps }) {
@@ -64,10 +65,48 @@ export function AdminCustomersTable({ users }: { users: UserProps }) {
                 {users.map(user => (
                     <TableRow key={user.id}>
                         <TableCell>{user.email}</TableCell>
-                        {/* <TableCell>{user.email}</TableCell> */}
-                        <TableCell>{getOrdersFromUser(user.id).then(orders => {
-                            return formatCurrency(orders.reduce((acc, order) => acc + order.price, 0))
-                        })}</TableCell>
+                        <TableCell>{formatCurrency(user.purchasedAmount)}</TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+        </Table>
+    )
+}
+
+type OrderProps = {
+    user: string | undefined
+    productName: string | undefined
+    productPrice: number | undefined
+    id: string
+    quantity: number
+    price: number
+    userID: string
+    productID: string
+    fullfilled: boolean
+}[]
+
+export function AdminOrdersTable({ orders }: { orders: OrderProps }) {
+    return (
+        <Table>
+            <TableHeader>
+                <TableColumn>Customer Email</TableColumn>
+                <TableColumn>Purchased Item</TableColumn>
+                <TableColumn>Quantity</TableColumn>
+                <TableColumn>Price (Total)</TableColumn>
+                <TableColumn>Order Fullfilled?</TableColumn>
+                <TableColumn>Actions</TableColumn>
+            </TableHeader>
+            <TableBody>
+                {orders.map(order => (
+                    <TableRow key={order.id}>
+                        <TableCell>{order.user}</TableCell>
+                        <TableCell>{order.productName}</TableCell>
+                        <TableCell>{order.quantity}</TableCell>
+                        <TableCell>{formatCurrency(order.productPrice as number)}</TableCell>
+                        <TableCell>{order.fullfilled ? <span className="text-success">Yes</span> : <span className="text-destructive">No</span>}</TableCell>
+                        <TableCell>
+                            <ActiveOrderToggle id={order.id} isFullfilled={order.fullfilled} />
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>

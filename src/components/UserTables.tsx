@@ -5,6 +5,7 @@ import { Tooltip } from "@nextui-org/tooltip"
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/table"
 import { Link } from "@nextui-org/link"
 import { Eye } from "lucide-react"
+import { DeleteCartItem } from "./CartActions"
 
 // User Orders Table
 
@@ -90,8 +91,9 @@ export function UserCartTable({ cartItems }: { cartItems: CartItemProps[] }) {
                             <TableCell>{item.product.name}</TableCell>
                             <TableCell>{formatNumber(item.quantity._count)}</TableCell>
                             <TableCell>{formatCurrency(item.product.price * item.quantity._count)}</TableCell>
-                            <TableCell>
+                            <TableCell className="relative flex items-center gap-2">
                                 <Tooltip content="View Product"><span className="text-lg text-default-400 cursor-pointer active:opacity-50"><Link href={`/products/${item.productID}`}><Eye /></Link></span></Tooltip>
+                                <DeleteCartItem id={item.id} />
                             </TableCell>
                         </TableRow>
                     )

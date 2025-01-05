@@ -1,5 +1,5 @@
-import { PageHeader } from "@/components/PageHeader";
-import { ProductForm } from "@/components/ProductForm";
+import { PageHeader } from "@/components/PageHeader"
+import { ProductForm } from "@/components/ProductForm"
 
 export default function NewProductPage() {
     return (<>
