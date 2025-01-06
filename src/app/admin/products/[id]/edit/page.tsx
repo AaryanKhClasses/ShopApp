@@ -6,6 +6,6 @@ export default async function EditProductPage({ params: { id } }: { params: { id
     const product = await db.product.findUnique({ where: { id } })
     return (<>
         <PageHeader>Edit Product</PageHeader>
-        <ProductForm product={product} />    
+        <ProductForm product={product} />
     </>)
 }

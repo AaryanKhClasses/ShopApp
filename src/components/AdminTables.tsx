@@ -35,7 +35,7 @@ export function AdminProductsTable({ products }: { products: ProductsProps }) {
                         <TableCell>{formatNumber(product._count.orders)}</TableCell>
                         <TableCell>
                             <div className="relative flex items-center gap-2">
-                                <Tooltip content="Edit Product"><span className="text-lg text-default-400 cursor-pointer active:opacity-50"><Link href={`/products/${product.id}/edit`}><Edit /></Link></span></Tooltip>
+                                <Tooltip content="Edit Product"><span className="text-lg text-default-400 cursor-pointer active:opacity-50"><Link href={`/admin/products/${product.id}/edit`}><Edit /></Link></span></Tooltip>
                                 <ActiveProductToggle id={product.id} isAvailable={product.isAvailable} />
                                 <DeleteProduct id={product.id} disabled={product._count.orders > 0} />
                             </div>
