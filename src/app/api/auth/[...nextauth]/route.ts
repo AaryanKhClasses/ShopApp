@@ -13,7 +13,7 @@ const authOptions: NextAuthOptions = {
         })
     ],
     callbacks: {
-        async signIn({ account, profile }) {
+        async signIn({ profile }) {
             if(!profile?.email) throw new Error("No Profile")
             await db.user.upsert({
                 where: { email: profile.email },
@@ -23,7 +23,7 @@ const authOptions: NextAuthOptions = {
             return true
         },
         session,
-        async jwt({ token, user, account, profile }: any) {
+        async jwt({ token, profile }: any) {
             if(profile) {
                 const user = await db.user.findUnique({ where: { email: profile.email } })
                 if(!user) return new Error("No User Found")

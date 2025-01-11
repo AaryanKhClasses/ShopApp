@@ -1,6 +1,6 @@
 "use client"
 
-import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure, Button, Link, Alert } from "@nextui-org/react"
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure, Button, Link } from "@nextui-org/react"
 import { addToCart } from "@/lib/cart"
 
 export function LoginModal({ userID, productID, isUser }: { userID: string, productID: string, isUser: boolean }) {

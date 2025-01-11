@@ -13,11 +13,9 @@ type ProductCardProps = {
     price: number
     description: string
     imagePath: string
-    isUser: boolean
-    userID: string
 }
 
-export function ProductCard({ id, name, price, description, imagePath, isUser, userID }: ProductCardProps) {
+export function ProductCard({ id, name, price, description, imagePath }: ProductCardProps) {
     return (
         <Card className="py-4" radius="lg">
             <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">

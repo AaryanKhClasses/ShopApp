@@ -3,7 +3,7 @@
 import { Check, Edit, X } from "lucide-react"
 import { formatCurrency, formatNumber } from "@/lib/formatter"
 import { ActiveProductToggle, DeleteProduct } from "@/components/ProductActions"
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip, Link, user } from "@nextui-org/react"
+import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip, Link } from "@nextui-org/react"
 import { ActiveOrderToggle } from "./OrderActions"
 
 type ProductsProps = {

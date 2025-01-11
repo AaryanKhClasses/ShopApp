@@ -16,7 +16,7 @@ export default async function CustomerLayout({
     return <>
         <Navbar>
             <NavbarBrand>
-                <Image src={favicon.src} width="30" height="30" />
+                <Image src={favicon.src} alt="Favicon" width="30" height="30" />
                 <span className="text-2xl cursor-pointer mx-2">{process.env.APP_NAME}</span>
             </NavbarBrand>
             <NavbarContent className="flex gap-4 items-center" justify="end">
