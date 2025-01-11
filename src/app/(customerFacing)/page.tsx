@@ -5,7 +5,6 @@ import db from "@/db/db"
 import { cache } from "@/lib/cache"
 import { Product } from "@prisma/client"
 import { Suspense } from "react"
-import { getUserSession } from "@/lib/session"
 
 const getMostPopularProducts = cache(() => {
     return db.product.findMany({ where: { isAvailable: true }, orderBy: { orders: { _count: "desc" } }, take: 6 })
@@ -48,8 +47,7 @@ function ProductGridSection({ fetcher, title }: ProductGridSectionProps ) {
 }
 
 async function ProductSuspense({ fetcher }: { fetcher: () => Promise<Product[]> }) {
-    const user = await getUserSession()
     return (await fetcher()).map(product => (
-        <ProductCard key={product.id} {...product} isUser={user ? true : false} userID={user ? user.id : ""} />
+        <ProductCard key={product.id} {...product} />
     ))
 }

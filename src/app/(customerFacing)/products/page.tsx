@@ -2,7 +2,6 @@ import { PageHeader } from "@/components/PageHeader"
 import { ProductCard, ProductCardSkeleton } from "@/components/ProductCard"
 import db from "@/db/db"
 import { cache } from "@/lib/cache"
-import { getUserSession } from "@/lib/session"
 import { Suspense } from "react"
 
 const getProducts = cache(() => {
@@ -29,9 +28,8 @@ export default function ProductsPage() {
 
 async function ProductsSuspense() {
     const products = await getProducts()
-    const user = await getUserSession()
     
     return products.map(product => (
-        <ProductCard key={product.id} {...product} isUser={user ? true : false} userID={user ? user.id : ""} />
+        <ProductCard key={product.id} {...product} />
     ))
 }
