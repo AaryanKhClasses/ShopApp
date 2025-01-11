@@ -5,7 +5,8 @@ import { getUserSession } from "@/lib/session"
 import { Image } from "@nextui-org/image"
 import { notFound } from "next/navigation"
 
-export default async function ProductPage({ params: { id } }: { params: { id: string } }) {
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+    const id = (await params).id
     const product = await db.product.findUnique({ where: { id } })
     if(product == null) return notFound()
 
