@@ -11,8 +11,8 @@ import { formatCurrency } from "@/lib/formatter"
 
 export function ProductForm({ product }: { product?: Product | null }) {
     const [error, action] = useActionState(product == null ? addProduct : updateProduct.bind(null, product.id), {})
-    const [price, setPrice] = useState("")
-    const [name, setName] = useState("")
+    const [price, setPrice] = useState(product?.price.toString() ?? "")
+    const [name, setName] = useState(product?.name ?? "")
     const [image, setImage] = useState<string | null>(null)
 
     const imageChange = (e: any) => {
@@ -49,7 +49,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
                             <div className="flex pointer-events-none items-center">
                                 <span className="text-default-400 text-small"><IndianRupee /></span>
                             </div>
-                        } type="number" id="price" name="price" isRequired placeholder={(product?.price || 0).toString() || undefined} label="Price" labelPlacement="outside" size="lg" onValueChange={setPrice} />
+                        } type="number" id="price" name="price" isRequired placeholder="Product Price Here" value={product == null ? price : (price ? price : product.price.toString())} label="Price" labelPlacement="outside" size="lg" onValueChange={setPrice} />
                         {error.price && <div className="text-destructive">{error.price}</div>}
                     </div>
                 </div>
@@ -59,7 +59,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
                             <div className="flex pointer-events-none items-center">
                                 <span className="text-default-400 text-small"><SquareChartGantt /></span>
                             </div>
-                        } type="text" id="name" name="name" isRequired placeholder={product?.name || "Product Name Here"} label="Product Name" labelPlacement="outside" className="my-4" size="lg" onValueChange={setName} />
+                        } type="text" id="name" name="name" isRequired placeholder="Product Name Here" value={product == null ? name : (name ? name : product.name)} label="Product Name" labelPlacement="outside" className="my-4" size="lg" onValueChange={setName} />
                         {error.name && <div className="text-destructive">{error.name}</div>}
                     </div>
                     <div className="space-y-2">
@@ -72,7 +72,7 @@ export function ProductForm({ product }: { product?: Product | null }) {
                     </div>
                 </div>
             </div>
-            <div className="flex w-full fixed bg-default-300 bottom-0 py-2 left-0 px-2 items-center justify-between">
+            <div className="flex w-full fixed bg-default bottom-0 py-2 left-0 px-2 items-center justify-between">
                 <div className="flex flex-col w-full">
                     <span className="font-bold text-xl line-clamp-1">{name || "Product Name"}</span>
                     <span className="text-l">{formatCurrency(Number(price) || 0)}</span>

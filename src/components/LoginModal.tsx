@@ -1,7 +1,6 @@
 "use client"
 
 import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure, Button, Link, Alert } from "@nextui-org/react"
-import { ShoppingCart } from "lucide-react"
 import { addToCart } from "@/lib/cart"
 
 export function LoginModal({ userID, productID, isUser }: { userID: string, productID: string, isUser: boolean }) {
@@ -10,8 +9,8 @@ export function LoginModal({ userID, productID, isUser }: { userID: string, prod
 
     return isUser ? <>
         <div className="flex w-full">
-            <Button size="lg" className="flex-grow" as={Link} href={`/products/${productID}/purchase`}>Purchase</Button>
-            <Button size="lg" className="w-auto mx-1" onPress={() => { addToCart(userID, productID); cartModal.onOpen() }}><ShoppingCart /></Button>
+            <Button variant="solid" color="primary" size="lg" className="w-1/2" as={Link} href={`/products/${productID}/purchase`}>Purchase Now!</Button>
+            <Button variant="bordered" color="primary" size="lg" className=" w-1/2 mx-1" onPress={() => { addToCart(userID, productID); cartModal.onOpen() }}>Add to Cart</Button>
         </div>
         <Modal isOpen={cartModal.isOpen} onOpenChange={cartModal.onOpenChange}>
             <ModalContent>
@@ -25,7 +24,7 @@ export function LoginModal({ userID, productID, isUser }: { userID: string, prod
             </ModalContent>
         </Modal>
         </> : <>
-        <Button size="lg" className="w-full" onPress={loginModal.onOpen}>Login to Purchase</Button>
+        <Button variant="solid" color="primary" size="lg" className="w-full" onPress={loginModal.onOpen}>Login to Purchase</Button>
         <Modal isOpen={loginModal.isOpen} onOpenChange={loginModal.onOpenChange}>
             <ModalContent>
                 {(onClose) => (<>

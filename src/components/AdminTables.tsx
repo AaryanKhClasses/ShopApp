@@ -61,7 +61,7 @@ export function AdminCustomersTable({ users }: { users: UserProps }) {
                 <TableColumn>Customer Email</TableColumn>
                 <TableColumn>Purchased Amount</TableColumn>
             </TableHeader>
-            <TableBody emptyContent={"No Orders Yet."}>
+            <TableBody emptyContent={"No Customers Yet."}>
                 {users.map(user => (
                     <TableRow key={user.id}>
                         <TableCell>{user.email}</TableCell>
@@ -96,7 +96,7 @@ export function AdminOrdersTable({ orders }: { orders: OrderProps }) {
                 <TableColumn>Order Fullfilled?</TableColumn>
                 <TableColumn>Actions</TableColumn>
             </TableHeader>
-            <TableBody>
+            <TableBody emptyContent={"No Orders Yet."}>
                 {orders.map(order => (
                     <TableRow key={order.id}>
                         <TableCell>{order.user}</TableCell>

@@ -1,10 +1,11 @@
 "use client"
 
 import { formatCurrency } from "@/lib/formatter"
-import { LoginModal } from "./LoginModal"
 import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card"
 import { Image } from "@nextui-org/image"
 import { Skeleton } from "@nextui-org/skeleton"
+import { Button } from "@nextui-org/button"
+import { Link } from "@nextui-org/link"
 
 type ProductCardProps = {
     id: string
@@ -27,7 +28,9 @@ export function ProductCard({ id, name, price, description, imagePath, isUser, u
             <CardBody className="overflow-visible py-2">
                 <Image src={imagePath} alt={name} className="w-full h-auto aspect-video" />
             </CardBody>
-            <CardFooter><LoginModal userID={isUser ? userID : ""} productID={id} isUser={isUser} /></CardFooter>
+            <CardFooter>
+                <Button variant="solid" color="primary" size="lg" className="w-full" as={Link} href={`/products/${id}`}>View Product</Button>
+            </CardFooter>
         </Card>
     )
 }
