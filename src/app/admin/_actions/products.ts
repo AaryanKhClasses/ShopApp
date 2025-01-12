@@ -5,6 +5,7 @@ import { z } from "zod"
 import fs from "fs/promises"
 import { notFound, redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
+import { put } from "@vercel/blob"
 
 const fileSchema = z.instanceof(File, { message: "Required" })
 const imageSchema = fileSchema.refine(file => file.size === 0 ||file.type.startsWith('image/'))
@@ -21,9 +22,9 @@ export async function addProduct(prevState: unknown, formData: FormData) {
     if(result.success === false) return result.error.formErrors.fieldErrors
     
     const data = result.data
-    await fs.mkdir("public/products", { recursive: true })
-    const imagePath = `/products/${crypto.randomUUID()}-${data.image.name}`
-    await fs.writeFile(`public${imagePath}`, Buffer.from(await data.image.arrayBuffer()))
+    const imageFile = formData.get("image") as File
+    const blob = await put(imageFile.name, imageFile, { access: "public" })
+    const imagePath = blob.url
 
     await db.product.create({ data: {
         name: data.name,
@@ -48,10 +49,9 @@ export async function updateProduct(id: string, prevState: unknown, formData: Fo
     
     let imagePath = product.imagePath
     if(data.image != null && data.image.size > 0) {
-        await fs.unlink(`public${product.imagePath}`)
-        imagePath = `/products/${crypto.randomUUID()}-${data.image.name}`
-        await fs.writeFile(`public${imagePath}`, Buffer.from(await data.image.arrayBuffer()))
-    }    
+        const blob = await put(data.image.name, data.image, { access: "public" })
+        imagePath = blob.url
+    }
 
     await db.product.update({
         where: { id },
