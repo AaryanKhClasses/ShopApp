@@ -19,7 +19,7 @@ export default async function MySettingsPage() {
         <main>
             <PageHeader>Account Settings</PageHeader>
             <h1 className="text-2xl">Personal Information:</h1>
-            <div className="flex my-2">
+            <div className="flex flex-col md:flex-row my-2">
                 <Image src={userSession.image as string} alt={userSession.name as string} height="300" width="300" />
                 <div className="mx-5 flex-1">
                     <h1 className="text-xl"></h1>User ID: <Input type="text" disabled value={userSession.id as string} className="w-full my-3" />

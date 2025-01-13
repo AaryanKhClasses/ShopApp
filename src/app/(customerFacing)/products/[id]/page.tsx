@@ -15,20 +15,20 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
     if(!user) isUser = false
     
     return (<>
-        <div className="flex w-full">
-            <div className="flex flex-col w-2/5">
+        <div className="flex flex-col md:flex-row w-full">
+            <div className="flex flex-col w-full md:w-2/5">
                 <div className="space-y-2">
                     <div className="flex justify-center items-center w-full h-[400px] bg-default-100 p-6 rounded-lg">
                         <Image src={product.imagePath} alt={product.name} width="400" height="400" className="object-contain w-full h-full"></Image>
                     </div>
                 </div>
                 <div className="space-y-2 my-3">
-                    <div className="flex justify-end items-center">
+                    <div className="flex md:justify-end items-center">
                         <div className="text-4xl font-bold text-success">Price: {formatCurrency(product.price)}</div>
                     </div>
                 </div>
             </div>
-            <div className="flex flex-col w-3/5 ml-5">
+            <div className="flex flex-col w-full md:w-3/5 md:ml-5">
                 <div className="space-y-2">
                     <div className="text-3xl font-bold">{product.name}</div>
                 </div>
